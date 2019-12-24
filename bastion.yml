@@ -13,13 +13,13 @@ Parameters:
 
 # Start Creating Resources
 Resources:
+
 # Security Group
 # This is needed to limit traffic to port 22 only to the bastion host
     BastionSecGroup:
         Type: "AWS::EC2::SecurityGroup"
         Properties:
             GroupDescription: Allow ssh access to bastion host
-            GroupName: LBSecGroup
             VpcId:
                 Fn::ImportValue:
                     !Sub "${EnvironmentName}-VPCID"
@@ -40,8 +40,9 @@ Resources:
                     sudo apt-get update -y
                     sudo apt-get install unzip awscli -y
             ImageId: ami-06d51e91cea0dac8d
-            SecurityGroups:
+            SecurityGroupIds:
             - Ref: BastionSecGroup
+            KeyName: !Ref KeyName
             InstanceType: t2.micro
             BlockDeviceMappings:
             - DeviceName: "/dev/sda1"
@@ -60,12 +61,11 @@ Outputs:
     Export:
       Name: !Sub "${EnvironmentName}-BastionHost"
 
-PublicIP: 
-  Description: "Public IP address of the Bastion Instance"
-  Value: 
-   "Fn::GetAtt": 
-    - BastionInstance
-    - PublicIp
-
-
-
+  PublicIP: 
+    Description: "Public IP address of the newly created EC2 instance"
+    Value:
+        Fn::GetAtt: 
+            - BastionInstance
+            - PublicIp
+    Export:
+        Name: !Sub "${EnvironmentName}-BastionHost-PUB-IP"
