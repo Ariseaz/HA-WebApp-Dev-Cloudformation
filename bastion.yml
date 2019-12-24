@@ -1,0 +1,71 @@
+Description: >
+    Adeniji Azeez / High-Availabity web App ProjectWork
+    This is the Bastion Host For remote access to the Network Infrastructure
+
+Parameters:
+
+    EnvironmentName:
+        Description: This Environment Name for the deployment
+        Type: String
+    KeyName:
+        Description: This the ssh key for the ec2 bastion host
+        Type: String
+
+# Start Creating Resources
+Resources:
+# Security Group
+# This is needed to limit traffic to port 22 only to the bastion host
+    BastionSecGroup:
+        Type: "AWS::EC2::SecurityGroup"
+        Properties:
+            GroupDescription: Allow ssh access to bastion host
+            GroupName: LBSecGroup
+            VpcId:
+                Fn::ImportValue:
+                    !Sub "${EnvironmentName}-VPCID"
+            SecurityGroupIngress:
+            -   IpProtocol: tcp
+                FromPort: 22
+                ToPort: 22
+                CidrIp: 0.0.0.0/0
+
+# Bastion Instance Creation
+    BastionInstance:
+        Type: "AWS::EC2::Instance"
+        Properties:
+            UserData: 
+                Fn::Base64: !Sub |
+                    #!/bin/bash
+                    # Install unzip, awscli, docker
+                    sudo apt-get update -y
+                    sudo apt-get install unzip awscli -y
+            ImageId: ami-06d51e91cea0dac8d
+            SecurityGroups:
+            - Ref: BastionSecGroup
+            InstanceType: t2.micro
+            BlockDeviceMappings:
+            - DeviceName: "/dev/sda1"
+              Ebs:
+                  VolumeSize: '10'
+            SubnetId: 
+                Fn::ImportValue: !Sub "${EnvironmentName}-PUB1-SN"
+
+# Output SEction
+Outputs:
+
+  InstanceId:
+    Description: Instance ID of the bastion host
+    Value:
+        Ref: BastionInstance
+    Export:
+      Name: !Sub "${EnvironmentName}-BastionHost"
+
+PublicIP: 
+  Description: "Public IP address of the Bastion Instance"
+  Value: 
+   "Fn::GetAtt": 
+    - BastionInstance
+    - PublicIp
+
+
+

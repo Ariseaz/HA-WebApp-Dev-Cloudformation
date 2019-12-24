@@ -1,0 +1,10 @@
+[
+    {   
+        "ParameterKey": "EnvironmentName",
+        "ParameterValue": "HA-Project"
+    },
+    {   
+        "ParameterKey": "KeyName",
+        "ParameterValue": "test-instance-udacity-cloudformation"
+    }
+]
