@@ -35,13 +35,13 @@ _RUN:_
 
 `./create.bat bastion bastion.yml bastion-params.json`
 
-# To update the stack
-./update.bat bastion bastion.yml bastion-params.json
+## To update the stack
+`./update.bat bastion bastion.yml bastion-params.json`
 
-Final Stage
-# To Destroy the whole infastructure
-Enter:
+## Final Stage
+**To Destroy the whole infastructure**
+_Enter:_
 
-_./destroy_ bastion           # delete bastion host
-_./destroy_ servers           # delete servers and loadbalancers
-_./destroy_ infra           # delete network infrastructure
+`_./destroy_ bastion`           **delete bastion host**
+`_./destroy_ servers`           **delete servers and loadbalancers**
+`_./destroy_ infra`           **delete network infrastructure**
