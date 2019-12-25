@@ -1,12 +1,11 @@
 # HA-WebApp-Dev-Cloudformation
 Cloud Formation Scripts to deploy HA WebApp
 
-Installation Procedure
+# Installation
 
 The first step is to layout the network; network diagram is provided in the infra-diagram folder for reference
 
-# Infrastructure / Network Deployment Script; should be deployed first
-infra.yml
+# Network Infrastructure Deployment Script; should be deployed first infra.yml
 
 # Infrastructure parameters for infra.yml
 infra-params.json
