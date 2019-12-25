@@ -38,3 +38,13 @@ The Third Stage
 # This stage is to include the Bastion Host in the Public Subnet for Remote Access into our network
 
 ./create.bat bastion bastion.yml bastion-params.json
+# To update the stack
+./update.bat bastion bastion.yml bastion-params.json
+
+Final Stage
+# To Destroy the whole infastructure
+Enter:
+
+./destroy bastion           # delete bastion host
+./destroy servers           # delete servers and loadbalancers
+./destroy infra           # delete network infrastructure
