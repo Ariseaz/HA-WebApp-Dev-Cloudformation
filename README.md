@@ -17,7 +17,7 @@ _Infrastructure parameters for infra.yml_
 **create.bat is the batch script for the deployment of this deployment script**
 `infra` ....is the stackname quoted
 
-## To Update the deployment script; run the script below:
+## To Update the deployment script; run the script below here:
 
 `./update.bat infra infra.yml infra-params.json`
 
