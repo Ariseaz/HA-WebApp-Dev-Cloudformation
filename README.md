@@ -45,3 +45,7 @@ _Enter:_
 `_./destroy_ bastion`           **delete bastion host**
 `_./destroy_ servers`           **delete servers and loadbalancers**
 `_./destroy_ infra`           **delete network infrastructure**
+
+# Documentation
+
+_The webApp was built on docker container_ 
