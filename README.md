@@ -34,6 +34,7 @@ _RUN:_
 **This stage is to include the Bastion Host in the Public Subnet for Remote Access into our network**
 
 `./create.bat bastion bastion.yml bastion-params.json`
+
 # To update the stack
 ./update.bat bastion bastion.yml bastion-params.json
 
