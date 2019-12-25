@@ -24,14 +24,17 @@ Deployment Instruction follows:
 
 ./update.bat infra infra.yml infra-params.json
 
-# update.bat is the batch script to updae the deployment stack 'infra'
-# 'infra' ....is the stackname quoted
+
+The Second Stage
+
+# We deploy the SErvers and Loadbalancers with Reference to the output in the 'infra' instance
+# RUN:
+
+./create.bat servers servers.yml servers-params.json
 
 
-# Server Deployment to be provissioned by the servers script
-servers.yml
+The Third Stage
 
-# Server deployment scrip parameter file
-servers-params.json
+# This stage is to include the Bastion Host in the Public Subnet for Remote Access into our network
 
-
+./create.bat bastion bastion.yml bastion-params.json
